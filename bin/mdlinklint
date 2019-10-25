@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+use MDLinkLinter\Console\Application;
+use MDLinkLinter\Console\Command\RunCommand;
+
+if (is_file($autoload = getcwd() . '/vendor/autoload.php')) {
+    require $autoload;
+} elseif (is_file($autoload = getcwd() . '/../../autoload.php')) {
+    require $autoload;
+}
+
+$application = new Application();
+$application->add(new RunCommand());
+$application->setDefaultCommand('run', true);
+$application->run();
