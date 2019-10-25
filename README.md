@@ -11,3 +11,9 @@ Currently following types of links are being validated:
 ```console
 bin/mdlinklint path --exclude=vendor --exclude=node_modules
 ```
+
+## Installation
+
+```console
+composer require --dev norzechowicz/md-link-linter
+```

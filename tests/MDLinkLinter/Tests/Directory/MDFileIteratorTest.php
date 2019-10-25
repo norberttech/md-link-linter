@@ -22,11 +22,16 @@ final class MDFileIteratorTest extends TestCase
     {
         $iterator = new MDFileIterator(__DIR__ . "/fixtures/not_nested", []);
 
-        $mdFiles = \iterator_to_array($iterator->iterate());
+        $mdFiles = \array_map(
+            function (\SplFileObject $mdFile) {
+                return $mdFile->getFilename();
+            },
+            \iterator_to_array($iterator->iterate())
+        );
 
-        $this->assertSame('file_with_valid_link.md', $mdFiles[0]->getFilename());
-        $this->assertSame('LICENSE.md', $mdFiles[1]->getFilename());
-        $this->assertSame('file_with_invalid_link.md', $mdFiles[2]->getFilename());
+        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles));
+        $this->assertTrue(\in_array('LICENSE.md', $mdFiles));
+        $this->assertTrue(\in_array('file_with_invalid_link.md', $mdFiles));
         $this->assertCount(3, $mdFiles);
     }
 
@@ -34,10 +39,15 @@ final class MDFileIteratorTest extends TestCase
     {
         $iterator = new MDFileIterator(__DIR__ . "/fixtures/nested", []);
 
-        $mdFiles = \iterator_to_array($iterator->iterate());
+        $mdFiles = \array_map(
+            function (\SplFileObject $mdFile) {
+                return $mdFile->getFilename();
+            },
+            \iterator_to_array($iterator->iterate())
+        );
 
-        $this->assertSame('file_with_valid_link.md', $mdFiles[0]->getFilename());
-        $this->assertSame('file_with_valid_link.md', $mdFiles[1]->getFilename());
+        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles));
+        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles));
         $this->assertCount(2, $mdFiles);
     }
 
@@ -45,9 +55,14 @@ final class MDFileIteratorTest extends TestCase
     {
         $iterator = new MDFileIterator(__DIR__ . "/fixtures/nested", ['one']);
 
-        $mdFiles = \iterator_to_array($iterator->iterate());
+        $mdFiles = \array_map(
+            function (\SplFileObject $mdFile) {
+                return $mdFile->getFilename();
+            },
+            \iterator_to_array($iterator->iterate())
+        );
 
-        $this->assertSame('file_with_valid_link.md', $mdFiles[0]->getFilename());
+        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles));
         $this->assertCount(1, $mdFiles);
     }
 }
