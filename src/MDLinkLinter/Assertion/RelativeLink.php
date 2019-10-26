@@ -31,14 +31,32 @@ final class RelativeLink implements Assertion
 
     public function assert() : void
     {
-        if (\file_exists($this->rootDirectory->getRealPath() . DIRECTORY_SEPARATOR . ltrim($this->link->path(), DIRECTORY_SEPARATOR))) {
+        if (\file_exists($this->composePath($this->rootDirectory->getRealPath() , $this->link->path()))) {
             return ;
         }
 
-        if (\file_exists($this->markdownFile->getPathInfo()->getRealPath() . DIRECTORY_SEPARATOR . ltrim($this->link->path(), DIRECTORY_SEPARATOR))) {
+        if (\file_exists($this->composePath($this->markdownFile->getPathInfo()->getRealPath() , $this->link->path()))) {
             return ;
         }
 
         throw new AssertionException();
+    }
+
+    private function composePath(string ...$pathElement) : string
+    {
+        return DIRECTORY_SEPARATOR . \implode(
+            DIRECTORY_SEPARATOR,
+            \array_map(
+                function (string $path) {
+                    return $this->trimPath($path);
+                },
+                $pathElement
+            )
+        );
+    }
+
+    private function trimPath(string $path): string
+    {
+        return \ltrim($path, DIRECTORY_SEPARATOR);
     }
 }

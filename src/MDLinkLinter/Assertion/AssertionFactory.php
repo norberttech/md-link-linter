@@ -20,11 +20,16 @@ final class AssertionFactory
 {
     private $rootDirectory;
     private $slugify;
+    private $mentionWhitelist;
 
-    public function __construct(\DirectoryIterator $rootDirectory, Slugify $slugify)
-    {
+    public function __construct(
+        \DirectoryIterator $rootDirectory,
+        Slugify $slugify,
+        array $mentionWhitelist
+    ) {
         $this->rootDirectory = $rootDirectory;
         $this->slugify = $slugify;
+        $this->mentionWhitelist = $mentionWhitelist;
     }
 
     public function create(Link $link, \SplFileObject $markdownFile) : Assertion
@@ -34,7 +39,7 @@ final class AssertionFactory
         }
 
         if ($link->isMention()) {
-            return new MentionLink($link);
+            return new MentionLink($link, $this->mentionWhitelist);
         }
 
         if ($link->isRelative()) {
