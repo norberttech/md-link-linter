@@ -36,7 +36,7 @@
     "bin": ["bin/mdlinklint"],
     "scripts": {
         "cs:php:fix": "php-cs-fixer fix",
-        "tests" : [
+        "test" : [
             "@test:markdown",
             "@test:php:cs",
             "phpunit --bootstrap vendor/autoload.php tests"
@@ -46,5 +46,8 @@
             "phpstan analyse src tests bin --level 5",
             "php-cs-fixer fix -v --dry-run --using-cache=no"
         ]
+    },
+    "config": {
+      "sort-packages": true
     }
 }
