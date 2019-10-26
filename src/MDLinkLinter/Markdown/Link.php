@@ -43,7 +43,7 @@ final class Link
 
     public function isGitSSH() : bool
     {
-        return \preg_match('/(.+)\@(.+)\:(.+)\/(.+)\.git/', $this->path) !== false;
+        return (bool) \preg_match('/(.+)\@(.+)\:(.+)\/(.+)\.git/', $this->path);
     }
 
     public function isRelative() : bool
