@@ -37,9 +37,11 @@
     "scripts": {
         "cs:php:fix": "php-cs-fixer fix",
         "tests" : [
+            "@test:markdown",
             "@test:php:cs",
             "phpunit --bootstrap vendor/autoload.php tests"
         ],
+        "test:markdown": "bin/mdlinklint ./ --exclude=vendor --exclude=tests",
         "test:php:cs": [
             "phpstan analyse src tests bin --level 5",
             "php-cs-fixer fix -v --dry-run --using-cache=no"
