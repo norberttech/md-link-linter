@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Hire in Social project.
+ * This file is part of the Markdown Link Linter library.
  *
  * (c) Norbert Orzechowicz <norbert@orzechowicz.pl>
  *
@@ -46,7 +46,6 @@ final class AnchorLink implements Assertion
             $headers = $xpath->evaluate(sprintf("//h%d", $h));
 
             for ($i = 0; $i < $headers->length; $i++) {
-
                 $headerSlug = $this->slugify->slugify($headers->item($i)->textContent);
 
                 if ($headerSlug === $targetId) {
@@ -54,12 +53,12 @@ final class AnchorLink implements Assertion
                 }
 
                 // Github does not removes "_" when generating slug
-                if ($headerSlug == \str_replace('_', '', $targetId)) {
+                if ($headerSlug === \str_replace('_', '', $targetId)) {
                     return ;
                 }
 
                 // Github is changing ":" into "-" when generating slug
-                if ($targetId == \str_replace('-', '', $headerSlug)) {
+                if ($targetId === \str_replace('-', '', $headerSlug)) {
                     return ;
                 }
             }

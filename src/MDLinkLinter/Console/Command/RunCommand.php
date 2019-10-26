@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Hire in Social project.
+ * This file is part of the Markdown Link Linter library.
  *
  * (c) Norbert Orzechowicz <norbert@orzechowicz.pl>
  *
@@ -82,13 +82,13 @@ final class RunCommand extends Command
 
             $io->table(
                 ['Broken markdown file', '(text)', '[link]'],
-                    $invalidLinks->map(function(InvalidLink $invalidLink) {
-                        return [
+                $invalidLinks->map(function (InvalidLink $invalidLink) {
+                    return [
                             $invalidLink->markdownFile()->getPathname(),
                             '(' . $invalidLink->link()->text() . ')',
                             '[' . $invalidLink->link()->path() . ']',
                         ];
-                    })
+                })
             );
 
             $io->note(\sprintf('Total files: %d', $invalidLinks->filesCount()));

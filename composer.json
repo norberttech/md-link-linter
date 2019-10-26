@@ -6,12 +6,15 @@
     "require": {
         "php": "^7.3",
         "ext-dom": "*",
+        "ext-mbstring": "*",
         "symfony/console": "^4.3",
         "erusev/parsedown": "^1.7",
         "cocur/slugify": "^3.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^8.4",
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phpstan/phpstan": "^0.11.19"
     },
     "license": "MIT",
     "authors": [
@@ -27,11 +30,19 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "MDLinkLinter\\": "tests/MDLinkLinter"
+            "": "tests"
         }
     },
     "bin": ["bin/mdlinklint"],
     "scripts": {
-        "tests" : "phpunit --bootstrap vendor/autoload.php tests"
+        "cs:php:fix": "php-cs-fixer fix",
+        "tests" : [
+            "@test:php:cs",
+            "phpunit --bootstrap vendor/autoload.php tests"
+        ],
+        "test:php:cs": [
+            "phpstan analyse src tests bin --level 5",
+            "php-cs-fixer fix -v --dry-run --using-cache=no"
+        ]
     }
 }
