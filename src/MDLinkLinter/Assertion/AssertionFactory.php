@@ -46,6 +46,10 @@ final class AssertionFactory
             return new RelativeLink($link, $markdownFile, $this->rootDirectory);
         }
 
+        if ($link->isGitSSH()) {
+            return new GitSSHLink($link);
+        }
+
         return new UrlLink($link);
     }
 }

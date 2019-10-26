@@ -45,4 +45,22 @@ final class LinkTest extends TestCase
 
         $this->assertTrue($link->isUrl());
     }
+
+    /**
+     * @dataProvider sshLinksProvider
+     */
+    public function test_git_ssh_link(string $sshLink)
+    {
+        $link = new Link('test', $sshLink, new \DOMDocument());
+
+        $this->assertTrue($link->isGitSSH());
+    }
+
+    public function sshLinksProvider() : array
+    {
+        return [
+            ['git@github.com:norzechowicz/md-link-linter.git'],
+            ['git@bitbucket.org:norzechowicz/md-link-linter.git'],
+        ];
+    }
 }
