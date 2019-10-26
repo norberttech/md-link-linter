@@ -41,9 +41,14 @@ final class Link
         return $this->document;
     }
 
+    public function isGitSSH() : bool
+    {
+        return \preg_match('/(.+)\@(.+)\:(.+)\/(.+)\.git/', $this->path) !== false;
+    }
+
     public function isRelative() : bool
     {
-        return !filter_var($this->path, FILTER_VALIDATE_URL) && !$this->isAnchor() && !$this->isMention();
+        return !filter_var($this->path, FILTER_VALIDATE_URL) && !$this->isAnchor() && !$this->isMention() && !$this->isGitSSH();
     }
 
     public function isUrl() : bool
