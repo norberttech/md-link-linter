@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Hire in Social project.
+ * This file is part of the Markdown Link Linter library.
  *
  * (c) Norbert Orzechowicz <norbert@orzechowicz.pl>
  *
@@ -37,6 +37,7 @@ final class RunCommand extends Command
     {
         $this->addArgument('path', InputArgument::REQUIRED, 'Path in which md link linter should validate all markdown files');
         $this->addOption('exclude', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Exclude folders with this name');
+        $this->addOption('mention', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) : int
@@ -45,6 +46,7 @@ final class RunCommand extends Command
 
         $path = $input->getArgument('path');
         $excludes = $input->getOption('exclude');
+        $mentionWhitelist = $input->getOption('mention');
 
         if (!\file_exists($path) || !\is_dir($path)) {
             $io->error(sprintf('Path "%s" does not exists or it\'s not a directory.', $path));
@@ -54,10 +56,13 @@ final class RunCommand extends Command
 
         $iterator = new MDFileIterator($path, $excludes);
         $htmlConverter = new HtmlConverter();
-        $assertionFactory = new AssertionFactory($iterator->directory(), new Slugify());
+        $assertionFactory = new AssertionFactory($iterator->directory(), new Slugify(), $mentionWhitelist);
         $invalidLinks = new InvalidLinks();
 
+
         foreach ($iterator->iterate() as $markdownFile) {
+            $io->write('.');
+
             $linkIterator = new LinkIterator($htmlConverter->convert($markdownFile));
 
             foreach ($linkIterator->iterate() as $link) {
@@ -69,18 +74,21 @@ final class RunCommand extends Command
             }
         }
 
+        $io->note('Scan finished');
+
+
         if ($invalidLinks->count()) {
             $io->error('Invalid links found');
 
             $io->table(
                 ['Broken markdown file', '(text)', '[link]'],
-                    $invalidLinks->map(function(InvalidLink $invalidLink) {
-                        return [
+                $invalidLinks->map(function (InvalidLink $invalidLink) {
+                    return [
                             $invalidLink->markdownFile()->getPathname(),
                             '(' . $invalidLink->link()->text() . ')',
                             '[' . $invalidLink->link()->path() . ']',
                         ];
-                    })
+                })
             );
 
             $io->note(\sprintf('Total files: %d', $invalidLinks->filesCount()));

@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace MDLinkLinter\Console;
+namespace MDLinkLinter\Tests\Mother;
 
-use Symfony\Component\Console\Application as SymfonyApplication;
+use MDLinkLinter\Markdown\Link;
 
-final class Application extends SymfonyApplication
+final class LinkMotherObject
 {
-    public function __construct()
+    public static function mention(string $name) : Link
     {
-        parent::__construct('mdlinklinter', '0.0.1');
+        return new Link($name, '@' . $name, new \DOMDocument());
     }
 }

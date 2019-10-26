@@ -7,13 +7,46 @@ Currently following types of links are being validated:
 
 * relative links
 * anchor links
+* mention links
 
 ```console
 bin/mdlinklint path --exclude=vendor --exclude=node_modules
+```
+
+### Validating mentions 
+
+Using `--mention` option you can set allowed mentions 
+
+```console
+bin/mdlinklint path --mentions=norzechowicz --mention=team_name
 ```
 
 ## Installation
 
 ```console
 composer require --dev norzechowicz/md-link-linter
+```
+
+If not used, mention link assertion will always pass.
+
+## Development
+
+### Install dependencies
+
+```console
+composer install
+```
+
+### Run tests
+
+```console
+composer tests
+```
+
+### Codding standards
+
+This command might change your code!
+
+```console
+composer cs:php:fix
 ```

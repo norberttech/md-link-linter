@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Hire in Social project.
+ * This file is part of the Markdown Link Linter library.
  *
  * (c) Norbert Orzechowicz <norbert@orzechowicz.pl>
  *
@@ -29,9 +29,9 @@ final class MDFileIteratorTest extends TestCase
             \iterator_to_array($iterator->iterate())
         );
 
-        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles));
-        $this->assertTrue(\in_array('LICENSE.md', $mdFiles));
-        $this->assertTrue(\in_array('file_with_invalid_link.md', $mdFiles));
+        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
+        $this->assertTrue(\in_array('LICENSE.md', $mdFiles, true));
+        $this->assertTrue(\in_array('file_with_invalid_link.md', $mdFiles, true));
         $this->assertCount(3, $mdFiles);
     }
 
@@ -46,8 +46,8 @@ final class MDFileIteratorTest extends TestCase
             \iterator_to_array($iterator->iterate())
         );
 
-        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles));
-        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles));
+        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
+        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
         $this->assertCount(2, $mdFiles);
     }
 
@@ -62,7 +62,7 @@ final class MDFileIteratorTest extends TestCase
             \iterator_to_array($iterator->iterate())
         );
 
-        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles));
+        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
         $this->assertCount(1, $mdFiles);
     }
 }

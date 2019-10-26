@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Hire in Social project.
+ * This file is part of the Markdown Link Linter library.
  *
  * (c) Norbert Orzechowicz <norbert@orzechowicz.pl>
  *
@@ -53,11 +53,11 @@ final class Link
 
     public function isAnchor() : bool
     {
-        return \strpos($this->path, '#', 0) === 0;
+        return \mb_strpos($this->path, '#', 0) === 0;
     }
 
     public function isMention() : bool
     {
-        return \strpos($this->path, '@', 0) === 0;
+        return \mb_strpos($this->path, '@', 0) === 0;
     }
 }

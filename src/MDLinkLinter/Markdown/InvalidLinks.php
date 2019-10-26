@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Hire in Social project.
+ * This file is part of the Markdown Link Linter library.
  *
  * (c) Norbert Orzechowicz <norbert@orzechowicz.pl>
  *
@@ -40,7 +40,7 @@ final class InvalidLinks implements \Countable
     public function filesCount() : int
     {
         return \count(\array_unique($this->map(
-            function(InvalidLink $invalidLink) {
+            function (InvalidLink $invalidLink) {
                 return $invalidLink->markdownFile()->getPathname();
             }
         )));

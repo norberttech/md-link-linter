@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Hire in Social project.
+ * This file is part of the Markdown Link Linter library.
  *
  * (c) Norbert Orzechowicz <norbert@orzechowicz.pl>
  *
@@ -24,9 +24,6 @@ final class MDFileIterator
         $this->excludes = $excludes;
     }
 
-    /**
-     * @return \SplFileObject[]
-     */
     public function iterate() : \Generator
     {
         $regex = new \RegexIterator(

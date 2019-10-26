@@ -1,0 +1,5 @@
+parameters:
+    ignoreErrors:
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::getFilename\(\)#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::isDir\(\)#'
+        - '#Call to an undefined method Iterator::getChildren\(\)#'
