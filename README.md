@@ -13,13 +13,6 @@ Currently following types of links are being validated:
 bin/mdlinklint path --exclude=vendor --exclude=node_modules
 ```
 
-
-## Installation
-
-```console
-composer require --dev norzechowicz/md-link-linter
-```
-
 ### Validating mentions 
 
 Using `--mention` option you can set allowed mentions 
@@ -28,4 +21,32 @@ Using `--mention` option you can set allowed mentions
 bin/mdlinklint path --mentions=norzechowicz --mention=team_name
 ```
 
+## Installation
+
+```console
+composer require --dev norzechowicz/md-link-linter
+```
+
 If not used, mention link assertion will always pass.
+
+## Development
+
+### Install dependencies
+
+```console
+composer install
+```
+
+### Run tests
+
+```console
+composer tests
+```
+
+### Codding standards
+
+This command might change your code!
+
+```console
+composer cs:php:fix
+```
