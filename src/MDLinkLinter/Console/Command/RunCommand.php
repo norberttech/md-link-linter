@@ -59,6 +59,7 @@ final class RunCommand extends Command
         $assertionFactory = new AssertionFactory($iterator->directory(), new Slugify(), $mentionWhitelist);
         $invalidLinks = new InvalidLinks();
 
+        $io->note(\sprintf('Scanning directory: %s', $iterator->directory()->getRealPath()));
 
         foreach ($iterator->iterate() as $markdownFile) {
             $io->write('.');
