@@ -25,9 +25,15 @@ bin/mdlinklint path --mentions=norzechowicz --mention=team_name
 
 ## Installation
 
+### Composer
+
 ```console
 composer require --dev norzechowicz/md-link-linter
 ```
+
+### Docker
+
+[Docker Hub - norberttech/md-link-linter](https://hub.docker.com/r/norberttech/md-link-linter)
 
 If not used, mention link assertion will always pass.
 
