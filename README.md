@@ -13,6 +13,8 @@ Currently following types of links are being validated:
 bin/mdlinklint path --exclude=vendor --exclude=node_modules
 ```
 
+![Preview](/docs/preview.jpg)
+
 ### Validating mentions 
 
 Using `--mention` option you can set allowed mentions 
