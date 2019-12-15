@@ -20,7 +20,7 @@ bin/mdlinklint path --exclude=vendor --exclude=node_modules
 Using `--mention` option you can set allowed mentions 
 
 ```console
-bin/mdlinklint path --mentions=norzechowicz --mention=team_name
+bin/mdlinklint path --mentions=norberttech --mention=team_name
 ```
 
 ## Installation
@@ -28,7 +28,7 @@ bin/mdlinklint path --mentions=norzechowicz --mention=team_name
 ### Composer
 
 ```console
-composer require --dev norzechowicz/md-link-linter
+composer require --dev norberttech/md-link-linter
 ```
 
 ### Docker
