@@ -7,9 +7,10 @@
         "php": "^7.3",
         "ext-dom": "*",
         "ext-mbstring": "*",
-        "symfony/console": "^4|^3.4",
+        "cocur/slugify": "^3.2",
         "erusev/parsedown": "^1.7",
-        "cocur/slugify": "^3.2"
+        "psr/log": "^1.1",
+        "symfony/console": "^4|^3.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4",
@@ -20,7 +21,7 @@
     "authors": [
         {
             "name": "Norbert Orzechowicz",
-            "email": "norbert@orzechowicz.pl"
+            "email": "contact@norbert.tech"
         }
     ],
     "autoload": {

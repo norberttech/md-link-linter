@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace MDLinkLinter\Assertion;
 
 use MDLinkLinter\Markdown\Link;
+use Psr\Log\LoggerInterface;
 
 final class GitSSHLink implements Assertion
 {
@@ -24,8 +25,8 @@ final class GitSSHLink implements Assertion
         $this->link = $link;
     }
 
-    public function assert() : void
+    public function assert(LoggerInterface $logger) : void
     {
-        // Todo: check with http client if exists?
+        $logger->debug('Skipping Git SSH Link validation ' . $this->link->path());
     }
 }

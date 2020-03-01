@@ -15,6 +15,7 @@ namespace MDLinkLinter\Assertion;
 
 use MDLinkLinter\Exception\AssertionException;
 use MDLinkLinter\Markdown\Link;
+use Psr\Log\LoggerInterface;
 
 final class UrlLink implements Assertion
 {
@@ -25,8 +26,8 @@ final class UrlLink implements Assertion
         $this->link = $link;
     }
 
-    public function assert() : void
+    public function assert(LoggerInterface $logger) : void
     {
-        // TODO: check http response?
+        $logger->debug('Skipping URL Link validation ' . $this->link->path());
     }
 }

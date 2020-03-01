@@ -15,6 +15,7 @@ namespace MDLinkLinter\Assertion;
 
 use MDLinkLinter\Exception\AssertionException;
 use MDLinkLinter\Markdown\Link;
+use Psr\Log\LoggerInterface;
 
 final class MentionLink implements Assertion
 {
@@ -32,14 +33,18 @@ final class MentionLink implements Assertion
         );
     }
 
-    public function assert() : void
+    public function assert(LoggerInterface $logger) : void
     {
         if (!\count($this->whitelist)) {
+            $logger->debug('Skipping Mention Link validation, whitelist is empty.');
+
             return ;
         }
 
         if (!\in_array(\ltrim(\mb_strtolower($this->link->path()), '@'), $this->whitelist, true)) {
             throw new AssertionException();
         }
+
+        $logger->debug(\sprintf('Mentions %s available at whitelist [%s]', $this->link->path(), \implode(', ', $this->whitelist)));
     }
 }
