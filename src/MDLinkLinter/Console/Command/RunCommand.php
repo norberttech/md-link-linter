@@ -44,7 +44,7 @@ final class RunCommand extends Command
 
     protected function configure()
     {
-        $this->addArgument('path', InputArgument::REQUIRED, 'Path in which md link linter should validate all markdown files');
+        $this->addArgument('path', InputArgument::OPTIONAL, 'Path in which md link linter should validate all markdown files');
         $this->addOption('exclude', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Exclude folders with this name');
         $this->addOption('mention', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
     }
@@ -58,9 +58,15 @@ final class RunCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $path = $input->getArgument('path');
+        $path = \getenv('MD_LINTER_SCAN_DIR') ? \getenv('MD_LINTER_SCAN_DIR') : $input->getArgument('path');
         $excludes = $input->getOption('exclude');
         $mentionWhitelist = $input->getOption('mention');
+
+        if (!$path) {
+            $io->error('Missing path to directory, please provide it as command first argument or env var MD_LINTER_SCAN_DIR');
+
+            return 1;
+        }
 
         if (!\file_exists($path) || !\is_dir($path)) {
             $io->error(sprintf('Path "%s" does not exists or it\'s not a directory.', $path));
