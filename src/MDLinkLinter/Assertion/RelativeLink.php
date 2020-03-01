@@ -15,6 +15,7 @@ namespace MDLinkLinter\Assertion;
 
 use MDLinkLinter\Exception\AssertionException;
 use MDLinkLinter\Markdown\Link;
+use Psr\Log\LoggerInterface;
 
 final class RelativeLink implements Assertion
 {
@@ -29,14 +30,31 @@ final class RelativeLink implements Assertion
         $this->rootDirectory = $rootDirectory;
     }
 
-    public function assert() : void
+    public function assert(LoggerInterface $logger) : void
     {
-        if (\file_exists($this->composePath($this->rootDirectory->getRealPath(), $this->link->path()))) {
-            return ;
-        }
+        $paths = [
+            $this->composePath($this->rootDirectory->getRealPath(), $this->link->path()),
+            \realpath($this->composePath($this->rootDirectory->getRealPath(), $this->link->path()))
+                ? \realpath($this->composePath($this->rootDirectory->getRealPath(), $this->link->path()))
+                : 'invalid realpath',
+            $this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()),
+            \realpath($this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()))
+                ? \realpath($this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()))
+                : 'invalid realpath',
+        ];
 
-        if (\file_exists($this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()))) {
-            return ;
+        $logger->debug(\sprintf('Relative Link validation, paths to test: [%s]', \implode(', ', $paths)));
+
+        foreach ($paths as $path) {
+            if (!$path) {
+                continue;
+            }
+
+            if (\file_exists($path)) {
+                $logger->debug(\sprintf('Relative Link %s points to valid existing file: %s', $this->link->text(), $path));
+
+                return ;
+            }
         }
 
         throw new AssertionException();

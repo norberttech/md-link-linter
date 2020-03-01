@@ -16,6 +16,7 @@ namespace MDLinkLinter\Assertion;
 use Cocur\Slugify\Slugify;
 use MDLinkLinter\Exception\AssertionException;
 use MDLinkLinter\Markdown\Link;
+use Psr\Log\LoggerInterface;
 
 final class AnchorLink implements Assertion
 {
@@ -30,7 +31,7 @@ final class AnchorLink implements Assertion
         $this->slugify = $slugify;
     }
 
-    public function assert() : void
+    public function assert(LoggerInterface $logger) : void
     {
         $xpath = new \DOMXPath($this->link->document());
         $targetId = \ltrim($this->link->path(), "#");

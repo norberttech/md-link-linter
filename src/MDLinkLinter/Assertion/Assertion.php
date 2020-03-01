@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace MDLinkLinter\Assertion;
 
 use MDLinkLinter\Exception\AssertionException;
+use Psr\Log\LoggerInterface;
 
 interface Assertion
 {
     /**
      * @throws AssertionException
      */
-    public function assert() : void;
+    public function assert(LoggerInterface $logger) : void;
 }

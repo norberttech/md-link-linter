@@ -22,10 +22,14 @@ use MDLinkLinter\Markdown\InvalidLink;
 use MDLinkLinter\Markdown\InvalidLinks;
 use MDLinkLinter\Markdown\Link;
 use MDLinkLinter\Markdown\LinkIterator;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
+use Psr\Log\NullLogger;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -33,11 +37,21 @@ final class RunCommand extends Command
 {
     protected static $defaultName = 'run';
 
+    /**
+     * @var LoggerInterface|null
+     */
+    private $logger = null;
+
     protected function configure()
     {
         $this->addArgument('path', InputArgument::REQUIRED, 'Path in which md link linter should validate all markdown files');
         $this->addOption('exclude', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Exclude folders with this name');
         $this->addOption('mention', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
+    }
+
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        $this->logger = new ConsoleLogger($output);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) : int
@@ -62,16 +76,29 @@ final class RunCommand extends Command
         $io->note(\sprintf('Scanning directory: %s', $iterator->directory()->getRealPath()));
 
         foreach ($iterator->iterate() as $markdownFile) {
-            $io->write('.');
+            /** @var \SplFileObject $markdownFile */
+            $this->logger->debug(\sprintf('Checking markdown file: %s', $markdownFile->getRealPath()));
+
+            $fileAssertionFailed = false;
 
             $linkIterator = new LinkIterator($htmlConverter->convert($markdownFile));
 
             foreach ($linkIterator->iterate() as $link) {
                 try {
-                    $assertionFactory->create($link, $markdownFile)->assert();
+                    /** @var Link $link */
+                    $this->logger->debug(\sprintf('Checking link: [%s](%s)', $link->text(), $link->path()));
+
+                    $assertionFactory->create($link, $markdownFile)->assert($this->logger);
                 } catch (AssertionException $assertionException) {
                     $invalidLinks->add(new InvalidLink($link, $markdownFile));
+                    $fileAssertionFailed = true;
                 }
+            }
+
+            if ($fileAssertionFailed) {
+                $io->write('F');
+            } else {
+                $io->write('.');
             }
         }
 
@@ -85,10 +112,10 @@ final class RunCommand extends Command
                 ['Broken markdown file', '(text)', '[link]'],
                 $invalidLinks->map(function (InvalidLink $invalidLink) {
                     return [
-                            $invalidLink->markdownFile()->getPathname(),
-                            '(' . $invalidLink->link()->text() . ')',
-                            '[' . $invalidLink->link()->path() . ']',
-                        ];
+                        $invalidLink->markdownFile()->getPathname(),
+                        '(' . $invalidLink->link()->text() . ')',
+                        '[' . $invalidLink->link()->path() . ']',
+                    ];
                 })
             );
 

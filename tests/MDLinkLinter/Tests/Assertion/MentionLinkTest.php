@@ -17,6 +17,7 @@ use MDLinkLinter\Assertion\MentionLink;
 use MDLinkLinter\Exception\AssertionException;
 use MDLinkLinter\Tests\Mother\LinkMotherObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 
 final class MentionLinkTest extends TestCase
 {
@@ -31,7 +32,7 @@ final class MentionLinkTest extends TestCase
     {
         $this->expectException(AssertionException::class);
 
-        (new MentionLink(LinkMotherObject::mention('test'), ['norzechowicz']))->assert();
+        (new MentionLink(LinkMotherObject::mention('test'), ['norzechowicz']))->assert(new NullLogger());
     }
 
     public function test_assertion_not_case_sensitive()
