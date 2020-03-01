@@ -33,11 +33,20 @@ final class RelativeLink implements Assertion
     public function assert(LoggerInterface $logger) : void
     {
         $paths = [
+            $this->composePath($this->rootDirectory->getPath(), $this->link->path()),
             $this->composePath($this->rootDirectory->getRealPath(), $this->link->path()),
+            \realpath($this->composePath($this->rootDirectory->getPath(), $this->link->path()))
+                ? \realpath($this->composePath($this->rootDirectory->getPath(), $this->link->path()))
+                : 'invalid realpath',
             \realpath($this->composePath($this->rootDirectory->getRealPath(), $this->link->path()))
                 ? \realpath($this->composePath($this->rootDirectory->getRealPath(), $this->link->path()))
                 : 'invalid realpath',
+
+            $this->composePath($this->markdownFile->getPathInfo()->getPath(), $this->link->path()),
             $this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()),
+            \realpath($this->composePath($this->markdownFile->getPathInfo()->getPath(), $this->link->path()))
+                ? \realpath($this->composePath($this->markdownFile->getPathInfo()->getPath(), $this->link->path()))
+                : 'invalid realpath',
             \realpath($this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()))
                 ? \realpath($this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()))
                 : 'invalid realpath',
