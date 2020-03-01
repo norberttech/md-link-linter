@@ -13,6 +13,14 @@ Currently following types of links are being validated:
 bin/mdlinklint path --exclude=vendor --exclude=node_modules
 ```
 
+First argument `path` can be skipped or overwritten by environment variable `MD_LINTER_SCAN_DIR` 
+
+```console
+MD_LINTER_SCAN_DIR=path bin/mdlinklint --exclude=vendor --exclude=node_modules
+```
+
+When both, argument path and environment variable are present, environment variable takes priority. 
+
 ![Preview](/docs/preview.jpg)
 
 ### Validating mentions 
