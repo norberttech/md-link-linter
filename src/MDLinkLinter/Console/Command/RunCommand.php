@@ -45,6 +45,7 @@ final class RunCommand extends Command
     protected function configure()
     {
         $this->addArgument('path', InputArgument::OPTIONAL, 'Path in which md link linter should validate all markdown files');
+        $this->addOption('dry-run', null, InputOption::VALUE_NONE, 'Scan path and output md files');
         $this->addOption('exclude', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Exclude folders with this name');
         $this->addOption('mention', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
     }
@@ -74,6 +75,10 @@ final class RunCommand extends Command
             return 1;
         }
 
+        if ($input->getOption('dry-run')) {
+            $io->note('Dry run');
+        }
+
         $iterator = new MDFileIterator($path, $excludes);
         $htmlConverter = new HtmlConverter();
         $assertionFactory = new AssertionFactory($iterator->directory(), new Slugify(), $mentionWhitelist);
@@ -94,7 +99,9 @@ final class RunCommand extends Command
                     /** @var Link $link */
                     $this->logger->debug(\sprintf('Checking link: [%s](%s)', $link->text(), $link->path()));
 
-                    $assertionFactory->create($link, $markdownFile)->assert($this->logger);
+                    if (!$input->getOption('dry-run')) {
+                        $assertionFactory->create($link, $markdownFile)->assert($this->logger);
+                    }
                 } catch (AssertionException $assertionException) {
                     $invalidLinks->add(new InvalidLink($link, $markdownFile));
                     $fileAssertionFailed = true;
@@ -110,6 +117,9 @@ final class RunCommand extends Command
 
         $io->note('Scan finished');
 
+        if ($input->getOption('dry-run')) {
+            return 0;
+        }
 
         if ($invalidLinks->count()) {
             $io->error('Invalid links found');
