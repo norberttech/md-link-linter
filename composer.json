@@ -4,7 +4,7 @@
     "keywords": ["markdown", "link", "linter"],
     "type": "library",
     "require": {
-        "php": "^7.3",
+        "php": ">=7.3",
         "ext-dom": "*",
         "ext-mbstring": "*",
         "cocur/slugify": "^3.2",
@@ -36,17 +36,21 @@
     },
     "bin": ["bin/mdlinklint"],
     "scripts": {
+        "build": [
+            "@test",
+            "@static:analyze"
+        ],
         "cs:php:fix": "php-cs-fixer fix",
         "test" : [
-            "@test:markdown",
-            "@test:php:cs",
             "phpunit --bootstrap vendor/autoload.php tests"
         ],
-        "test:markdown": "bin/mdlinklint ./ --exclude=vendor --exclude=tests",
-        "test:php:cs": [
+        "static:analyze": [
+            "@test:markdown",
             "phpstan analyse src tests bin --level 5",
-            "php-cs-fixer fix -v --dry-run --using-cache=no"
-        ]
+            "@test:php:cs"
+        ],
+        "test:markdown": "bin/mdlinklint ./ --exclude=vendor --exclude=tests",
+        "test:php:cs": "php-cs-fixer fix -v --dry-run --using-cache=no"
     },
     "config": {
       "sort-packages": true
