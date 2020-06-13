@@ -15,15 +15,29 @@ namespace MDLinkLinter\Directory;
 
 final class MDFileIterator
 {
+    /**
+     * @var string
+     */
     private $path;
+
+    /**
+     * @var array<int, string>
+     */
     private $excludes;
 
+    /**
+     * @param string $path
+     * @param array $excludes
+     */
     public function __construct(string $path, array $excludes)
     {
         $this->path = $path;
         $this->excludes = $excludes;
     }
 
+    /**
+     * @return \Generator<\SplFileObject>
+     */
     public function iterate() : \Generator
     {
         $regex = new \RegexIterator(

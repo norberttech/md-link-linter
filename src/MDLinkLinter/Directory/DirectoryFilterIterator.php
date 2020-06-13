@@ -15,23 +15,39 @@ namespace MDLinkLinter\Directory;
 
 use RecursiveIterator;
 
+/**
+ * @method bool isDir()
+ * @method string getFilename()
+ * @method string getPathName()
+ * @method \RecursiveDirectoryIterator getInnerIterator()
+ */
 final class DirectoryFilterIterator extends \RecursiveFilterIterator
 {
+    /**
+     * @var string[]
+     */
     private $excludes;
 
+    /**
+     * @param string[] $excludes
+     * @param \RecursiveDirectoryIterator $iterator
+     */
     public function __construct(array $excludes, RecursiveIterator $iterator)
     {
         parent::__construct($iterator);
         $this->excludes = $excludes;
     }
 
-    public function accept()
+    public function accept() : bool
     {
         return !($this->isDir() && \in_array($this->getFilename(), $this->excludes, true));
     }
 
     public function getChildren()
     {
-        return new self($this->excludes, $this->getInnerIterator()->getChildren());
+        /** @var \RecursiveDirectoryIterator $iterator */
+        $iterator = $this->getInnerIterator()->getChildren();
+
+        return new self($this->excludes, $iterator);
     }
 }
