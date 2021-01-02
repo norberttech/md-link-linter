@@ -20,6 +20,7 @@ use Psr\Log\LoggerInterface;
 final class MentionLink implements Assertion
 {
     private $link;
+
     private $whitelist;
 
     public function __construct(Link $link, array $whitelist)
@@ -38,7 +39,7 @@ final class MentionLink implements Assertion
         if (!\count($this->whitelist)) {
             $logger->debug('Skipping Mention Link validation, whitelist is empty.');
 
-            return ;
+            return;
         }
 
         if (!\in_array(\ltrim(\mb_strtolower($this->link->path()), '@'), $this->whitelist, true)) {

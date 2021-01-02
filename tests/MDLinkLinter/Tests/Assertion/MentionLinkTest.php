@@ -21,21 +21,21 @@ use Psr\Log\NullLogger;
 
 final class MentionLinkTest extends TestCase
 {
-    public function test_do_nothing_when_whitelist_is_empty()
+    public function test_do_nothing_when_whitelist_is_empty() : void
     {
         $assertion = new MentionLink(LinkMotherObject::mention('norzechowicz'), []);
 
         $this->assertTrue(true);
     }
 
-    public function test_assertion_when_mention_not_on_whitelist()
+    public function test_assertion_when_mention_not_on_whitelist() : void
     {
         $this->expectException(AssertionException::class);
 
         (new MentionLink(LinkMotherObject::mention('test'), ['norzechowicz']))->assert(new NullLogger());
     }
 
-    public function test_assertion_not_case_sensitive()
+    public function test_assertion_not_case_sensitive() : void
     {
         $assertion = new MentionLink(LinkMotherObject::mention('NorzechowiCZ'), ['Norzechowicz']);
 

@@ -18,9 +18,9 @@ use PHPUnit\Framework\TestCase;
 
 final class MDFileIteratorTest extends TestCase
 {
-    public function test_iterating_over_not_nested_directory()
+    public function test_iterating_over_not_nested_directory() : void
     {
-        $iterator = new MDFileIterator(__DIR__ . "/fixtures/not_nested", []);
+        $iterator = new MDFileIterator(__DIR__ . '/fixtures/not_nested', []);
 
         $mdFiles = \array_map(
             function (\SplFileObject $mdFile) {
@@ -35,9 +35,9 @@ final class MDFileIteratorTest extends TestCase
         $this->assertCount(3, $mdFiles);
     }
 
-    public function test_iterating_over_nested_directory()
+    public function test_iterating_over_nested_directory() : void
     {
-        $iterator = new MDFileIterator(__DIR__ . "/fixtures/nested", []);
+        $iterator = new MDFileIterator(__DIR__ . '/fixtures/nested', []);
 
         $mdFiles = \array_map(
             function (\SplFileObject $mdFile) {
@@ -51,9 +51,9 @@ final class MDFileIteratorTest extends TestCase
         $this->assertCount(2, $mdFiles);
     }
 
-    public function test_iterating_over_nested_directory_with_excluded_directory()
+    public function test_iterating_over_nested_directory_with_excluded_directory() : void
     {
-        $iterator = new MDFileIterator(__DIR__ . "/fixtures/nested", ['one']);
+        $iterator = new MDFileIterator(__DIR__ . '/fixtures/nested', ['one']);
 
         $mdFiles = \array_map(
             function (\SplFileObject $mdFile) {

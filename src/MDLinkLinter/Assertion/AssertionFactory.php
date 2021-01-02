@@ -19,7 +19,9 @@ use MDLinkLinter\Markdown\Link;
 final class AssertionFactory
 {
     private $rootDirectory;
+
     private $slugify;
+
     private $mentionWhitelist;
 
     public function __construct(

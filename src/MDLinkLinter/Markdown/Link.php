@@ -16,7 +16,9 @@ namespace MDLinkLinter\Markdown;
 final class Link
 {
     private $text;
+
     private $path;
+
     private $document;
 
     public function __construct(string $text, string $path, \DOMDocument $document)
@@ -26,17 +28,17 @@ final class Link
         $this->document = $document;
     }
 
-    public function text(): string
+    public function text() : string
     {
         return $this->text;
     }
 
-    public function path(): string
+    public function path() : string
     {
         return $this->path;
     }
 
-    public function document(): \DOMDocument
+    public function document() : \DOMDocument
     {
         return $this->document;
     }
@@ -48,12 +50,12 @@ final class Link
 
     public function isRelative() : bool
     {
-        return !filter_var($this->path, FILTER_VALIDATE_URL) && !$this->isAnchor() && !$this->isMention() && !$this->isGitSSH();
+        return !\filter_var($this->path, FILTER_VALIDATE_URL) && !$this->isAnchor() && !$this->isMention() && !$this->isGitSSH();
     }
 
     public function isUrl() : bool
     {
-        return (bool) filter_var($this->path, FILTER_VALIDATE_URL);
+        return (bool) \filter_var($this->path, FILTER_VALIDATE_URL);
     }
 
     public function isAnchor() : bool

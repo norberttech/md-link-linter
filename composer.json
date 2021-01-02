@@ -4,18 +4,18 @@
     "keywords": ["markdown", "link", "linter"],
     "type": "library",
     "require": {
-        "php": ">=7.3",
+        "php": "~7.3.0 || ~7.4.2 || 8.0.0",
         "ext-dom": "*",
         "ext-mbstring": "*",
         "cocur/slugify": "^3.2",
         "erusev/parsedown": "^1.7",
         "psr/log": "^1.1",
-        "symfony/console": "^4|^3.4"
+        "symfony/console": "^3.4||^4.4||^5.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4",
         "friendsofphp/php-cs-fixer": "^2.15",
-        "phpstan/phpstan": "^0.11.19"
+        "phpstan/phpstan": "^0.12.64"
     },
     "license": "MIT",
     "authors": [

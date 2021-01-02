@@ -20,7 +20,9 @@ use Psr\Log\LoggerInterface;
 final class RelativeLink implements Assertion
 {
     private $link;
+
     private $markdownFile;
+
     private $rootDirectory;
 
     public function __construct(Link $link, \SplFileObject $markdownFile, \DirectoryIterator $rootDirectory)
@@ -62,7 +64,7 @@ final class RelativeLink implements Assertion
             if (\file_exists($path)) {
                 $logger->debug(\sprintf('Relative Link %s points to valid existing file: %s', $this->link->text(), $path));
 
-                return ;
+                return;
             }
         }
 
@@ -82,7 +84,7 @@ final class RelativeLink implements Assertion
         );
     }
 
-    private function trimPath(string $path): string
+    private function trimPath(string $path) : string
     {
         return \ltrim($path, DIRECTORY_SEPARATOR);
     }

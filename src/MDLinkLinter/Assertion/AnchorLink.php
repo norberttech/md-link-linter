@@ -21,7 +21,9 @@ use Psr\Log\LoggerInterface;
 final class AnchorLink implements Assertion
 {
     private $slugify;
+
     private $link;
+
     private $markdownFile;
 
     public function __construct(Slugify $slugify, Link $link, \SplFileObject $markdownFile)
@@ -34,33 +36,33 @@ final class AnchorLink implements Assertion
     public function assert(LoggerInterface $logger) : void
     {
         $xpath = new \DOMXPath($this->link->document());
-        $targetId = \ltrim($this->link->path(), "#");
+        $targetId = \ltrim($this->link->path(), '#');
 
-        $target = $xpath->evaluate(\sprintf("//*[@id=\"%s\"]", $targetId));
+        $target = $xpath->evaluate(\sprintf('//*[@id="%s"]', $targetId));
 
         if ($target->length) {
-            return ;
+            return;
         }
 
         // This is mostly for github that is adding anchors to all headers
         for ($h = 1; $h <= 6; $h++) {
-            $headers = $xpath->evaluate(sprintf("//h%d", $h));
+            $headers = $xpath->evaluate(\sprintf('//h%d', $h));
 
             for ($i = 0; $i < $headers->length; $i++) {
                 $headerSlug = $this->slugify->slugify($headers->item($i)->textContent);
 
                 if ($headerSlug === $targetId) {
-                    return ;
+                    return;
                 }
 
                 // Github does not removes "_" when generating slug
                 if ($headerSlug === \str_replace('_', '', $targetId)) {
-                    return ;
+                    return;
                 }
 
                 // Github is changing ":" into "-" when generating slug
                 if ($targetId === \str_replace('-', '', $headerSlug)) {
-                    return ;
+                    return;
                 }
             }
         }
