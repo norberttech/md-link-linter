@@ -1,9 +1,13 @@
-## [Unreleased] - 2021-01-02
+## [0.0.10] - 2021-01-02
 
 ### Added
+  - [c7d4c3](https://github.com/norberttech/md-link-linter/commit/c7d4c370a48f98a05a29a382027ac5312354be68) - **CHANGELOG** - [@norberttech](https://github.com/norberttech)
   - [#9](https://github.com/norberttech/md-link-linter/pull/9) - **Dependabot configuration** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
+  - [b006f8](https://github.com/norberttech/md-link-linter/commit/b006f8c9948c46c4ea691a945301a5093e04d64a) - **phpuint from 8.4 to 9.5** - [@norberttech](https://github.com/norberttech)
+  - [#10](https://github.com/norberttech/md-link-linter/pull/10) - **cocur/slugify from 3.2 to 4.0.0** - [@dependabot[bot]](https://github.com/apps/dependabot)
+  - [d168b8](https://github.com/norberttech/md-link-linter/commit/d168b84ae43df1dae9064091dc72aff911e9a32d) - **Replace master branch with 1.x** - [@norberttech](https://github.com/norberttech)
   - [#9](https://github.com/norberttech/md-link-linter/pull/9) - **CS fixer configuration to be more specific** - [@norberttech](https://github.com/norberttech)
   - [e0f830](https://github.com/norberttech/md-link-linter/commit/e0f83006b8385cb30e32c61ce85bcb4e8cd5c54f) - **Schedule tests execution** - [@norberttech](https://github.com/norberttech)
 
