@@ -7,7 +7,7 @@
         "php": "~7.3.0 || ~7.4.2 || 8.0.0",
         "ext-dom": "*",
         "ext-mbstring": "*",
-        "cocur/slugify": "^3.2",
+        "cocur/slugify": "^3.2 || ^4.0",
         "erusev/parsedown": "^1.7",
         "psr/log": "^1.1",
         "symfony/console": "^3.4||^4.4||^5.0"
