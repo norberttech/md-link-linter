@@ -16,6 +16,7 @@ namespace MDLinkLinter\Markdown;
 final class InvalidLink
 {
     private $link;
+
     private $markdownFile;
 
     public function __construct(Link $link, \SplFileObject $markdownFile)
@@ -24,12 +25,12 @@ final class InvalidLink
         $this->markdownFile = $markdownFile;
     }
 
-    public function link(): Link
+    public function link() : Link
     {
         return $this->link;
     }
 
-    public function markdownFile(): \SplFileObject
+    public function markdownFile() : \SplFileObject
     {
         return $this->markdownFile;
     }

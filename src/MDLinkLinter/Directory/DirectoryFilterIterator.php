@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace MDLinkLinter\Directory;
 
-use RecursiveIterator;
-
 /**
  * @method bool isDir()
  * @method string getFilename()
@@ -32,7 +30,7 @@ final class DirectoryFilterIterator extends \RecursiveFilterIterator
      * @param string[] $excludes
      * @param \RecursiveDirectoryIterator $iterator
      */
-    public function __construct(array $excludes, RecursiveIterator $iterator)
+    public function __construct(array $excludes, \RecursiveIterator $iterator)
     {
         parent::__construct($iterator);
         $this->excludes = $excludes;

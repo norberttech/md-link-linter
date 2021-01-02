@@ -26,7 +26,7 @@ final class HtmlConverter
     {
         $dom = new \DOMDocument();
         @$dom->loadHTML(\sprintf(
-            "<markdown>%s</markdown>",
+            '<markdown>%s</markdown>',
             $this->parser->parse(\file_get_contents($markdownFile->getPathname()))
         ));
 

@@ -26,8 +26,8 @@ final class LinkIterator
     {
         $xpath = new \DOMXPath($this->document);
 
-        $hrefs = $xpath->evaluate("//a");
-        $imgs = $xpath->evaluate("//img");
+        $hrefs = $xpath->evaluate('//a');
+        $imgs = $xpath->evaluate('//img');
 
         for ($i = 0; $i < $hrefs->length; $i++) {
             yield new Link($hrefs->item($i)->textContent, $hrefs->item($i)->getAttribute('href'), $this->document);

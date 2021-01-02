@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace MDLinkLinter\Assertion;
 
-use MDLinkLinter\Exception\AssertionException;
 use MDLinkLinter\Markdown\Link;
 use Psr\Log\LoggerInterface;
 

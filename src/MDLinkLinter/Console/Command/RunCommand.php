@@ -23,8 +23,6 @@ use MDLinkLinter\Markdown\InvalidLinks;
 use MDLinkLinter\Markdown\Link;
 use MDLinkLinter\Markdown\LinkIterator;
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
-use Psr\Log\NullLogger;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,11 +36,11 @@ final class RunCommand extends Command
     protected static $defaultName = 'run';
 
     /**
-     * @var LoggerInterface|null
+     * @var null|LoggerInterface
      */
-    private $logger = null;
+    private $logger;
 
-    protected function configure()
+    protected function configure() : void
     {
         $this->addArgument('path', InputArgument::OPTIONAL, 'Path in which md link linter should validate all markdown files');
         $this->addOption('dry-run', null, InputOption::VALUE_NONE, 'Scan path and output md files');
@@ -50,7 +48,7 @@ final class RunCommand extends Command
         $this->addOption('mention', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output) : void
     {
         $this->logger = new ConsoleLogger($output);
     }
@@ -70,7 +68,7 @@ final class RunCommand extends Command
         }
 
         if (!\file_exists($path) || !\is_dir($path)) {
-            $io->error(sprintf('Path "%s" does not exists or it\'s not a directory.', $path));
+            $io->error(\sprintf('Path "%s" does not exists or it\'s not a directory.', $path));
 
             return 1;
         }
