@@ -45,6 +45,7 @@ final class RunCommand extends Command
         $this->addOption('dry-run', null, InputOption::VALUE_NONE, 'Scan path and output md files');
         $this->addOption('exclude', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Exclude folders with this name');
         $this->addOption('mention', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
+        $this->addOption('break-on-failure', 'bf', InputOption::VALUE_NONE, 'Break the inspection on first failure');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output) : void
@@ -85,10 +86,10 @@ final class RunCommand extends Command
 
         $scannedFiles = 0;
 
+        /** @var \SplFileObject $markdownFile */
         foreach ($iterator->iterate() as $markdownFile) {
             $scannedFiles++;
 
-            /** @var \SplFileObject $markdownFile */
             $this->logger->info(\sprintf('Checking markdown file: %s', $markdownFile->getRealPath()));
 
             $fileAssertionFailed = false;
@@ -110,9 +111,15 @@ final class RunCommand extends Command
             }
 
             if ($fileAssertionFailed) {
-                $io->write('F');
+                $io->write('<fg=red>F</>');
             } else {
                 $io->write('.');
+            }
+
+            if ($input->getOption('break-on-failure')) {
+                if ($invalidLinks->count()) {
+                    break;
+                }
             }
 
             if ($scannedFiles >= 120) {
@@ -135,8 +142,8 @@ final class RunCommand extends Command
                 $invalidLinks->map(function (InvalidLink $invalidLink) {
                     return [
                         $invalidLink->markdownFile()->getPathname(),
-                        '(' . $invalidLink->link()->text() . ')',
-                        '[' . $invalidLink->link()->path() . ']',
+                        '[' . $invalidLink->link()->text() . ']',
+                        '(' . $invalidLink->link()->path() . ')',
                     ];
                 })
             );
