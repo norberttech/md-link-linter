@@ -19,9 +19,9 @@ use MDLinkLinter\Markdown\Link;
 final class AssertionFactory
 {
     /**
-     * @var \DirectoryIterator
+     * @var string
      */
-    private $rootDirectory;
+    private $rootPath;
 
     /**
      * @var Slugify
@@ -34,16 +34,16 @@ final class AssertionFactory
     private $mentionWhitelist;
 
     /**
-     * @param \DirectoryIterator $rootDirectory
+     * @param string $rootPath
      * @param Slugify $slugify
      * @param string[] $mentionWhitelist
      */
     public function __construct(
-        \DirectoryIterator $rootDirectory,
+        string $rootPath,
         Slugify $slugify,
         array $mentionWhitelist
     ) {
-        $this->rootDirectory = $rootDirectory;
+        $this->rootPath = $rootPath;
         $this->slugify = $slugify;
         $this->mentionWhitelist = $mentionWhitelist;
     }
@@ -59,7 +59,7 @@ final class AssertionFactory
         }
 
         if ($link->isRelative()) {
-            return new RelativeLink($link, $markdownFile, $this->rootDirectory);
+            return new RelativeLink($link, $markdownFile, $this->rootPath);
         }
 
         if ($link->isGitSSH()) {

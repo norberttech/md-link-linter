@@ -31,16 +31,18 @@ Arguments:
   path                     Path in which md link linter should validate all markdown files
 
 Options:
-      --dry-run            Scan path and output md files
-      --exclude[=EXCLUDE]  Exclude folders with this name (multiple values allowed)
-      --mention[=MENTION]  Mentions whitelist (can include all team members or groups), if empty mentions are not validated (multiple values allowed)
-  -h, --help               Display this help message
-  -q, --quiet              Do not output any message
-  -V, --version            Display this application version
-      --ansi               Force ANSI output
-      --no-ansi            Disable ANSI output
-  -n, --no-interaction     Do not ask any interactive question
-  -v|vv|vvv, --verbose     Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+      --dry-run               Scan path and output md files
+      --exclude=EXCLUDE       Exclude folders with this name (multiple values allowed)
+      --mention=MENTION       Mentions whitelist (can include all team members or groups), if empty mentions are not validated (multiple values allowed)
+  -h, --help                  Display help for the given command. When no command is given display help for the run command
+  -q, --quiet                 Do not output any message
+  -V, --version               Display this application version
+      --ansi                  Force ANSI output
+      --no-ansi               Disable ANSI output
+  -n, --no-interaction        Do not ask any interactive question
+  -bf, --break-on-failure     Break the inspection on first failure
+  -rp, --root-path=ROOT-PATH  Root path used to assert absolute links. Link: [link](/nested/file.php) will check if file /nested/file.php exists from this path
+  -v|vv|vvv, --verbose        Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 ```
 
 ![Preview](/docs/preview.jpg)
@@ -53,19 +55,31 @@ Using `--mention` option you can set allowed mentions
 bin/mdlinklint path --mentions=norberttech --mention=team_name
 ```
 
+If not used, mention link assertion will always pass.
+
 ## Installation
+
+### Docker
+
+**Recommended** - md-link-linter is not a type of tool you want to put into your project as a dependency because it comes 
+with it own dependencies that might overlaps with yours.
+
+[Docker Hub - norberttech/md-link-linter](https://hub.docker.com/r/norberttech/md-link-linter)
 
 ### Composer
 
 ```console
-composer require --dev norberttech/md-link-linter
+composer global require norberttech/md-link-linter
 ```
 
-### Docker
+### Phive
 
-[Docker Hub - norberttech/md-link-linter](https://hub.docker.com/r/norberttech/md-link-linter)
+Since md-link-linter relay on `\realpath` function which does not work in Phar environment (explanation below)
+there are no plans for now to make it available through phive. 
 
-If not used, mention link assertion will always pass.
+> The function realpath() will not work for a file which is inside a Phar as such path would be a virtual path, not a real one.
+
+[php.net realpath documentation](https://www.php.net/manual/en/function.realpath.php)
 
 ## Development
 

@@ -30,37 +30,24 @@ final class RelativeLink implements Assertion
     private $markdownFile;
 
     /**
-     * @var \DirectoryIterator
+     * @var string
      */
-    private $rootDirectory;
+    private $rootPath;
 
-    public function __construct(Link $link, \SplFileObject $markdownFile, \DirectoryIterator $rootDirectory)
+    public function __construct(Link $link, \SplFileObject $markdownFile, string $rootPath)
     {
         $this->link = $link;
         $this->markdownFile = $markdownFile;
-        $this->rootDirectory = $rootDirectory;
+        $this->rootPath = $rootPath;
     }
 
     public function assert(LoggerInterface $logger) : void
     {
         $paths = [
-            $this->composePath($this->rootDirectory->getPath(), $this->link->path()),
-            $this->composePath($this->rootDirectory->getRealPath(), $this->link->path()),
-            \realpath($this->composePath($this->rootDirectory->getPath(), $this->link->path()))
-                ? \realpath($this->composePath($this->rootDirectory->getPath(), $this->link->path()))
-                : 'invalid realpath',
-            \realpath($this->composePath($this->rootDirectory->getRealPath(), $this->link->path()))
-                ? \realpath($this->composePath($this->rootDirectory->getRealPath(), $this->link->path()))
-                : 'invalid realpath',
-
-            $this->composePath($this->markdownFile->getPathInfo()->getPath(), $this->link->path()),
-            $this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()),
-            \realpath($this->composePath($this->markdownFile->getPathInfo()->getPath(), $this->link->path()))
-                ? \realpath($this->composePath($this->markdownFile->getPathInfo()->getPath(), $this->link->path()))
-                : 'invalid realpath',
-            \realpath($this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()))
-                ? \realpath($this->composePath($this->markdownFile->getPathInfo()->getRealPath(), $this->link->path()))
-                : 'invalid realpath',
+            $this->link->path(),
+            $this->composePath($this->rootPath, $this->link->path()),
+            $this->composePath($this->markdownFile->getPathInfo()->getPathname(), $this->link->path()),
+            $this->composePath($this->rootPath, $this->markdownFile->getPathInfo()->getPathname(), $this->link->path()),
         ];
 
         $logger->debug(\sprintf('Relative Link validation, paths to test: [%s]', \implode(', ', $paths)));
@@ -82,7 +69,7 @@ final class RelativeLink implements Assertion
 
     private function composePath(string ...$pathElement) : string
     {
-        return DIRECTORY_SEPARATOR . \implode(
+        return \implode(
             DIRECTORY_SEPARATOR,
             \array_map(
                 function (string $path) {
@@ -95,6 +82,6 @@ final class RelativeLink implements Assertion
 
     private function trimPath(string $path) : string
     {
-        return \ltrim($path, DIRECTORY_SEPARATOR);
+        return \rtrim($path, DIRECTORY_SEPARATOR);
     }
 }

@@ -46,6 +46,7 @@ final class RunCommand extends Command
         $this->addOption('exclude', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Exclude folders with this name');
         $this->addOption('mention', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
         $this->addOption('break-on-failure', 'bf', InputOption::VALUE_NONE, 'Break the inspection on first failure');
+        $this->addOption('root-path', 'rp', InputOption::VALUE_REQUIRED, 'Root path used to assert absolute links. Link: [link](/nested/file.php) will check if file /nested/file.php exists from this path');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output) : void
@@ -58,6 +59,8 @@ final class RunCommand extends Command
         $io = new LinterStyle($input, $output);
 
         $path = \getenv('MD_LINTER_SCAN_DIR') ? \getenv('MD_LINTER_SCAN_DIR') : $input->getArgument('path');
+        $rootPath = $input->getOption('root-path') ? $input->getOption('root-path') : $path;
+
         $excludes = $input->getOption('exclude');
         $mentionWhitelist = $input->getOption('mention');
 
@@ -73,16 +76,23 @@ final class RunCommand extends Command
             return 1;
         }
 
+        if (!\file_exists($rootPath) || !\is_dir($rootPath)) {
+            $io->error(\sprintf('Root Path "%s" does not exists or it\'s not a directory.', $rootPath));
+
+            return 1;
+        }
+
         if ($input->getOption('dry-run')) {
             $io->note('Dry run');
         }
 
         $iterator = new MDFileIterator($path, $excludes);
         $htmlConverter = new HtmlConverter();
-        $assertionFactory = new AssertionFactory($iterator->directory(), new Slugify(), $mentionWhitelist);
+        $assertionFactory = new AssertionFactory(\realpath($rootPath), new Slugify(), $mentionWhitelist);
         $invalidLinks = new InvalidLinks();
 
-        $io->note(\sprintf('Scanning directory: %s', $iterator->directory()->getPath()));
+        $io->note('Scanning directory: ' . $path);
+        $io->note('Root Path: ' . $rootPath);
 
         $scannedFiles = 0;
 
