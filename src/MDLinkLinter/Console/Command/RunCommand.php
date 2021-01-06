@@ -29,7 +29,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class RunCommand extends Command
 {
@@ -44,8 +43,8 @@ final class RunCommand extends Command
     {
         $this->addArgument('path', InputArgument::OPTIONAL, 'Path in which md link linter should validate all markdown files');
         $this->addOption('dry-run', null, InputOption::VALUE_NONE, 'Scan path and output md files');
-        $this->addOption('exclude', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Exclude folders with this name');
-        $this->addOption('mention', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
+        $this->addOption('exclude', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Exclude folders with this name');
+        $this->addOption('mention', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Mentions whitelist (can include all team members or groups), if empty mentions are not validated');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output) : void
@@ -55,7 +54,7 @@ final class RunCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
-        $io = new SymfonyStyle($input, $output);
+        $io = new LinterStyle($input, $output);
 
         $path = \getenv('MD_LINTER_SCAN_DIR') ? \getenv('MD_LINTER_SCAN_DIR') : $input->getArgument('path');
         $excludes = $input->getOption('exclude');
@@ -82,11 +81,15 @@ final class RunCommand extends Command
         $assertionFactory = new AssertionFactory($iterator->directory(), new Slugify(), $mentionWhitelist);
         $invalidLinks = new InvalidLinks();
 
-        $io->note(\sprintf('Scanning directory: %s', $iterator->directory()->getRealPath()));
+        $io->note(\sprintf('Scanning directory: %s', $iterator->directory()->getPath()));
+
+        $scannedFiles = 0;
 
         foreach ($iterator->iterate() as $markdownFile) {
+            $scannedFiles++;
+
             /** @var \SplFileObject $markdownFile */
-            $this->logger->debug(\sprintf('Checking markdown file: %s', $markdownFile->getRealPath()));
+            $this->logger->info(\sprintf('Checking markdown file: %s', $markdownFile->getRealPath()));
 
             $fileAssertionFailed = false;
 
@@ -110,6 +113,11 @@ final class RunCommand extends Command
                 $io->write('F');
             } else {
                 $io->write('.');
+            }
+
+            if ($scannedFiles >= 120) {
+                $io->newLine();
+                $scannedFiles = 0;
             }
         }
 

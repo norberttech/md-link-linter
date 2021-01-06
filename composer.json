@@ -4,7 +4,7 @@
     "keywords": ["markdown", "link", "linter"],
     "type": "library",
     "require": {
-        "php": "~7.3.0 || ~7.4.2 || 8.0.0",
+        "php": "~7.3.0 || ~7.4.2 || ~8.0.0",
         "ext-dom": "*",
         "ext-mbstring": "*",
         "cocur/slugify": "^3.2 || ^4.0",

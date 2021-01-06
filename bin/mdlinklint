@@ -1,6 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+use MDLinkLinter\Console\Application;
+use MDLinkLinter\Console\Command\RunCommand;
+
 (function () {
     if (is_file($autoload = getcwd() . '/vendor/autoload.php')) {
         require $autoload;
@@ -21,8 +24,8 @@
         exit(1);
     }
 
-    $application = new \MDLinkLinter\Console\Application();
-    $application->add(new \MDLinkLinter\Console\Command\RunCommand());
+    $application = new Application();
+    $application->add(new RunCommand());
     $application->setDefaultCommand('run', true);
     $application->run();
 })();

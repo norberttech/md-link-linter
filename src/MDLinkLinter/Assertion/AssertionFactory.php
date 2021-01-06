@@ -18,12 +18,26 @@ use MDLinkLinter\Markdown\Link;
 
 final class AssertionFactory
 {
+    /**
+     * @var \DirectoryIterator
+     */
     private $rootDirectory;
 
+    /**
+     * @var Slugify
+     */
     private $slugify;
 
+    /**
+     * @var string[]
+     */
     private $mentionWhitelist;
 
+    /**
+     * @param \DirectoryIterator $rootDirectory
+     * @param Slugify $slugify
+     * @param string[] $mentionWhitelist
+     */
     public function __construct(
         \DirectoryIterator $rootDirectory,
         Slugify $slugify,

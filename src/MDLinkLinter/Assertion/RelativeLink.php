@@ -19,10 +19,19 @@ use Psr\Log\LoggerInterface;
 
 final class RelativeLink implements Assertion
 {
+    /**
+     * @var Link
+     */
     private $link;
 
+    /**
+     * @var \SplFileObject
+     */
     private $markdownFile;
 
+    /**
+     * @var \DirectoryIterator
+     */
     private $rootDirectory;
 
     public function __construct(Link $link, \SplFileObject $markdownFile, \DirectoryIterator $rootDirectory)
