@@ -45,7 +45,7 @@ Options:
   -v|vv|vvv, --verbose        Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 ```
 
-![Preview](/docs/preview.jpg)
+![Preview](/docs/preview.png)
 
 ### Validating mentions 
 
