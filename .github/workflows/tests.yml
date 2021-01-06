@@ -43,6 +43,7 @@ jobs:
           restore-keys: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}"
 
       - name: "Install dependencies"
+        run: "composer install --no-interaction --no-progress --no-suggest"
 
       - name: "Test Compatibility"
         run: "composer test"

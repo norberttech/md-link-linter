@@ -158,7 +158,7 @@ final class RunCommand extends Command
                 })
             );
 
-            $io->note(\sprintf('Total files: %d', $invalidLinks->filesCount()));
+            $io->note(\sprintf('Total invalid files: %d', $invalidLinks->filesCount()));
             $io->note(\sprintf('Total invalid links: %d', $invalidLinks->count()));
 
             return 1;
