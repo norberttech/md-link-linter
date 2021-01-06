@@ -1,3 +1,15 @@
+## [0.0.11] - 2021-01-06
+
+### Added
+  - [e1cfc5](https://github.com/norberttech/md-link-linter/commit/e1cfc546180427b8c026b75f81b9369fde911923) - **break on failure option** - [@norberttech](https://github.com/norberttech)
+
+### Changed
+  - [d42135](https://github.com/norberttech/md-link-linter/commit/d42135bdd818023f820b8e8aea16865f257551a0) - **Improved logs verbosity** - [@norberttech](https://github.com/norberttech)
+
+### Fixed
+  - [a436e9](https://github.com/norberttech/md-link-linter/commit/a436e94e4d7c3de564b72dafff605e263eee160e) - **broken tests workflow** - [@norberttech](https://github.com/norberttech)
+  - [d709aa](https://github.com/norberttech/md-link-linter/commit/d709aaa8f914bc5b756e5852e80325907994ceb9) - **issues with absolute paths, added --root-path option** - [@norberttech](https://github.com/norberttech)
+
 ## [0.0.10] - 2021-01-02
 
 ### Added
