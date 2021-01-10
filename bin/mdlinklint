@@ -1,17 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-use MDLinkLinter\Console\Application;
+use MDLinkLinter\Console\LinterApplication;
 use MDLinkLinter\Console\Command\RunCommand;
 
 (function () {
-    if (is_file($autoload = getcwd() . '/vendor/autoload.php')) {
+    if (is_file($autoload = __DIR__ . '/../vendor/autoload.php')) {
+        echo $autoload . "\n";
         require_once $autoload;
     } elseif (is_file($autoload = getcwd() . '/../../autoload.php')) {
-        require_once $autoload;
-    } elseif (is_file($autoload = __DIR__ . '/../vendor/autoload.php')) {
+        echo $autoload . "\n";
         require_once $autoload;
     } elseif (is_file($autoload = __DIR__ . '/../../../autoload.php')) {
+        echo $autoload . "\n";
         require_once $autoload;
     } else {
         fwrite(STDERR,
@@ -22,7 +23,7 @@ use MDLinkLinter\Console\Command\RunCommand;
         exit(1);
     }
 
-    $application = new Application();
+    $application = new LinterApplication();
     $application->add(new RunCommand());
     $application->setDefaultCommand('run', true);
     $application->run();

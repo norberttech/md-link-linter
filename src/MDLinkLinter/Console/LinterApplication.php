@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace MDLinkLinter\Console;
 
-use Symfony\Component\Console\Application as SymfonyApplication;
+use Symfony\Component\Console\Application;
 
-final class Application extends SymfonyApplication
+final class LinterApplication extends Application
 {
     public function __construct()
     {
