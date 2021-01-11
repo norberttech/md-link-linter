@@ -6,13 +6,10 @@ use MDLinkLinter\Console\Command\RunCommand;
 
 (function () {
     if (is_file($autoload = __DIR__ . '/../vendor/autoload.php')) {
-        echo $autoload . "\n";
         require_once $autoload;
     } elseif (is_file($autoload = getcwd() . '/../../autoload.php')) {
-        echo $autoload . "\n";
         require_once $autoload;
     } elseif (is_file($autoload = __DIR__ . '/../../../autoload.php')) {
-        echo $autoload . "\n";
         require_once $autoload;
     } else {
         fwrite(STDERR,
