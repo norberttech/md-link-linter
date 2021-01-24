@@ -35,6 +35,10 @@ final class AnchorLink implements Assertion
 
     public function assert(LoggerInterface $logger) : void
     {
+        if ($this->link->path() === '#') {
+            return;
+        }
+
         $xpath = new \DOMXPath($this->link->document());
         $targetId = \ltrim($this->link->path(), '#');
 
