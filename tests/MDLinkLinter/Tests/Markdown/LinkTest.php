@@ -46,6 +46,13 @@ final class LinkTest extends TestCase
         $this->assertTrue($link->isUrl());
     }
 
+    public function test_hash() : void
+    {
+        $link = new Link('test', '#', new \DOMDocument());
+
+        $this->assertTrue($link->isAnchor());
+    }
+
     /**
      * @dataProvider sshLinksProvider
      */

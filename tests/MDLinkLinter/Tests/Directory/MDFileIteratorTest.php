@@ -32,7 +32,7 @@ final class MDFileIteratorTest extends TestCase
         $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
         $this->assertTrue(\in_array('LICENSE.md', $mdFiles, true));
         $this->assertTrue(\in_array('file_with_invalid_link.md', $mdFiles, true));
-        $this->assertCount(3, $mdFiles);
+        $this->assertCount(4, $mdFiles);
     }
 
     public function test_iterating_over_nested_directory() : void
