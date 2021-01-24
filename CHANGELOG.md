@@ -1,10 +1,13 @@
-## [Unreleased] - 2021-01-22
+## [Unreleased] - 2021-01-24
+
+### Added
+  - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **Integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
-  - [813480](https://github.com/norberttech/md-link-linter/commit/8134809c44d5802e2ba9cb541833a962fedbc7f6) - **CHANGELOG.md** - [@aeon-automation](https://github.com/aeon-automation)
   - [8484ca](https://github.com/norberttech/md-link-linter/commit/8484ca3446ee2908c5160f0f7db46eee760c91d7) - **exclude tests from documentation validation** - [@norberttech](https://github.com/norberttech)
 
 ### Fixed
+  - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **throwing errors for [link](#) - empty anchor link** - [@norberttech](https://github.com/norberttech)
   - [9215da](https://github.com/norberttech/md-link-linter/commit/9215da53d7f1cac228a135593a8884de00a9621e) - **CHANGELOG.md formatting** - [@norberttech](https://github.com/norberttech)
   - [#13](https://github.com/norberttech/md-link-linter/pull/13) - **Fix autoloading in docker when analyzed folder already have autoload inside** - [@norberttech](https://github.com/norberttech)
 
