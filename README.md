@@ -13,6 +13,11 @@ Currently following types of links are being validated:
 bin/mdlinklint path --exclude=vendor --exclude=node_modules
 ```
 
+Use with Docker: 
+```console
+docker run -t --rm -v $PWD:/app norberttech/md-link-linter --exclude=vendor --exclude=node_modules .
+```
+
 First argument `path` can be skipped or overwritten by environment variable `MD_LINTER_SCAN_DIR` 
 
 ```console
