@@ -1,9 +1,10 @@
-## [Unreleased] - 2021-03-05
+## [Unreleased] - 2021-03-08
 
 ### Added
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **Integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
+- [#37](https://github.com/norberttech/md-link-linter/pull/37) - **Improve PHPUnit assertions** - [@peter279k](https://github.com/peter279k)
 - [1fec31](https://github.com/norberttech/md-link-linter/commit/1fec31cb06b2705af54b4b1b90f6e0a0c06713c9) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 - [8484ca](https://github.com/norberttech/md-link-linter/commit/8484ca3446ee2908c5160f0f7db46eee760c91d7) - **exclude tests from documentation validation** - [@norberttech](https://github.com/norberttech)
 
