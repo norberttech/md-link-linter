@@ -29,9 +29,9 @@ final class MDFileIteratorTest extends TestCase
             \iterator_to_array($iterator->iterate())
         );
 
-        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
-        $this->assertTrue(\in_array('LICENSE.md', $mdFiles, true));
-        $this->assertTrue(\in_array('file_with_invalid_link.md', $mdFiles, true));
+        $this->assertContains('file_with_valid_link.md', $mdFiles);
+        $this->assertContains('LICENSE.md', $mdFiles);
+        $this->assertContains('file_with_invalid_link.md', $mdFiles);
         $this->assertCount(4, $mdFiles);
     }
 
@@ -46,8 +46,8 @@ final class MDFileIteratorTest extends TestCase
             \iterator_to_array($iterator->iterate())
         );
 
-        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
-        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
+        $this->assertContains('file_with_valid_link.md', $mdFiles);
+        $this->assertContains('file_with_valid_link.md', $mdFiles);
         $this->assertCount(2, $mdFiles);
     }
 
@@ -62,7 +62,7 @@ final class MDFileIteratorTest extends TestCase
             \iterator_to_array($iterator->iterate())
         );
 
-        $this->assertTrue(\in_array('file_with_valid_link.md', $mdFiles, true));
+        $this->assertContains('file_with_valid_link.md', $mdFiles);
         $this->assertCount(1, $mdFiles);
     }
 }
