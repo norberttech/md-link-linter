@@ -1,7 +1,8 @@
-## [Unreleased] - 2021-08-03
+## [Unreleased] - 2021-08-23
 
 ### Added
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **Integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
+- [e1cfc5](https://github.com/norberttech/md-link-linter/commit/e1cfc546180427b8c026b75f81b9369fde911923) - **break on failure option** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
 - [#37](https://github.com/norberttech/md-link-linter/pull/37) - **Improve PHPUnit assertions** - [@peter279k](https://github.com/peter279k)
@@ -15,6 +16,7 @@
 - [9215da](https://github.com/norberttech/md-link-linter/commit/9215da53d7f1cac228a135593a8884de00a9621e) - **CHANGELOG.md formatting** - [@norberttech](https://github.com/norberttech)
 - [#13](https://github.com/norberttech/md-link-linter/pull/13) - **Fix autoloading in docker when analyzed folder already have autoload inside** - [@norberttech](https://github.com/norberttech)
 - [a436e9](https://github.com/norberttech/md-link-linter/commit/a436e94e4d7c3de564b72dafff605e263eee160e) - **broken tests workflow** - [@norberttech](https://github.com/norberttech)
+- [d709aa](https://github.com/norberttech/md-link-linter/commit/d709aaa8f914bc5b756e5852e80325907994ceb9) - **issues with absolute paths, added --root-path option** - [@norberttech](https://github.com/norberttech)
 
 ### Removed
 - [1a80a5](https://github.com/norberttech/md-link-linter/commit/1a80a5cb88b6f63a70b22eb30cf333149b29d3ff) - **redundant autoload path echo** - [@norberttech](https://github.com/norberttech)
