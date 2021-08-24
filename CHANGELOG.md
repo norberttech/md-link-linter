@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-08-23
+## [Unreleased] - 2021-08-24
 
 ### Added
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **Integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
@@ -10,6 +10,8 @@
 - [8484ca](https://github.com/norberttech/md-link-linter/commit/8484ca3446ee2908c5160f0f7db46eee760c91d7) - **exclude tests from documentation validation** - [@norberttech](https://github.com/norberttech)
 - [75b7fa](https://github.com/norberttech/md-link-linter/commit/75b7fab233a300d0e5d22ca41b3e4e9a406c57f8) - **documnetation, added linter to github workflows** - [@norberttech](https://github.com/norberttech)
 - [28221b](https://github.com/norberttech/md-link-linter/commit/28221ba1bd243c8d3aacf622d1894cf575e22a13) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
+- [d42135](https://github.com/norberttech/md-link-linter/commit/d42135bdd818023f820b8e8aea16865f257551a0) - **Improved logs verbosity** - [@norberttech](https://github.com/norberttech)
+- [3e4f70](https://github.com/norberttech/md-link-linter/commit/3e4f703796e2c0b8f7b5c67dc98aa97bde3c8aba) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
 
 ### Fixed
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **throwing errors for link - empty anchor link** - [@norberttech](https://github.com/norberttech)
