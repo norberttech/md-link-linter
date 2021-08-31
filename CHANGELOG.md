@@ -3,6 +3,7 @@
 ### Added
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **Integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
 - [e1cfc5](https://github.com/norberttech/md-link-linter/commit/e1cfc546180427b8c026b75f81b9369fde911923) - **break on failure option** - [@norberttech](https://github.com/norberttech)
+- [c7d4c3](https://github.com/norberttech/md-link-linter/commit/c7d4c370a48f98a05a29a382027ac5312354be68) - **CHANGELOG** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
 - [#37](https://github.com/norberttech/md-link-linter/pull/37) - **Improve PHPUnit assertions** - [@peter279k](https://github.com/peter279k)
@@ -13,6 +14,7 @@
 - [d42135](https://github.com/norberttech/md-link-linter/commit/d42135bdd818023f820b8e8aea16865f257551a0) - **Improved logs verbosity** - [@norberttech](https://github.com/norberttech)
 - [3e4f70](https://github.com/norberttech/md-link-linter/commit/3e4f703796e2c0b8f7b5c67dc98aa97bde3c8aba) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
 - [b006f8](https://github.com/norberttech/md-link-linter/commit/b006f8c9948c46c4ea691a945301a5093e04d64a) - **phpuint from 8.4 to 9.5** - [@norberttech](https://github.com/norberttech)
+- [d168b8](https://github.com/norberttech/md-link-linter/commit/d168b84ae43df1dae9064091dc72aff911e9a32d) - **Replace master branch with 1.x** - [@norberttech](https://github.com/norberttech)
 
 ### Fixed
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **throwing errors for link - empty anchor link** - [@norberttech](https://github.com/norberttech)
