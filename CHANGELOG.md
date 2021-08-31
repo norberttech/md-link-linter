@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-08-24
+## [Unreleased] - 2021-08-31
 
 ### Added
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **Integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
@@ -12,6 +12,7 @@
 - [28221b](https://github.com/norberttech/md-link-linter/commit/28221ba1bd243c8d3aacf622d1894cf575e22a13) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
 - [d42135](https://github.com/norberttech/md-link-linter/commit/d42135bdd818023f820b8e8aea16865f257551a0) - **Improved logs verbosity** - [@norberttech](https://github.com/norberttech)
 - [3e4f70](https://github.com/norberttech/md-link-linter/commit/3e4f703796e2c0b8f7b5c67dc98aa97bde3c8aba) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
+- [b006f8](https://github.com/norberttech/md-link-linter/commit/b006f8c9948c46c4ea691a945301a5093e04d64a) - **phpuint from 8.4 to 9.5** - [@norberttech](https://github.com/norberttech)
 
 ### Fixed
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **throwing errors for link - empty anchor link** - [@norberttech](https://github.com/norberttech)
