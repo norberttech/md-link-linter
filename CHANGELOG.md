@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-09-03
+## [Unreleased] - 2021-09-13
 
 ### Added
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **Integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
