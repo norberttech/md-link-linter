@@ -1,17 +1,19 @@
-## [Unreleased] - 2021-09-13
+## [Unreleased] - 2021-11-18
 
 ### Added
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **Integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
 - [#37](https://github.com/norberttech/md-link-linter/pull/37) - **Improve PHPUnit assertions** - [@peter279k](https://github.com/peter279k)
-- [1fec31](https://github.com/norberttech/md-link-linter/commit/1fec31cb06b2705af54b4b1b90f6e0a0c06713c9) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 - [8484ca](https://github.com/norberttech/md-link-linter/commit/8484ca3446ee2908c5160f0f7db46eee760c91d7) - **exclude tests from documentation validation** - [@norberttech](https://github.com/norberttech)
 
 ### Fixed
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **throwing errors for link - empty anchor link** - [@norberttech](https://github.com/norberttech)
 - [9215da](https://github.com/norberttech/md-link-linter/commit/9215da53d7f1cac228a135593a8884de00a9621e) - **CHANGELOG.md formatting** - [@norberttech](https://github.com/norberttech)
 - [#13](https://github.com/norberttech/md-link-linter/pull/13) - **Fix autoloading in docker when analyzed folder already have autoload inside** - [@norberttech](https://github.com/norberttech)
+
+### Updated
+- [1fec31](https://github.com/norberttech/md-link-linter/commit/1fec31cb06b2705af54b4b1b90f6e0a0c06713c9) - **README.md** - [@norberttech](https://github.com/norberttech)
 
 ### Removed
 - [1a80a5](https://github.com/norberttech/md-link-linter/commit/1a80a5cb88b6f63a70b22eb30cf333149b29d3ff) - **redundant autoload path echo** - [@norberttech](https://github.com/norberttech)
