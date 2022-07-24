@@ -9,6 +9,7 @@
 - [8484ca](https://github.com/norberttech/md-link-linter/commit/8484ca3446ee2908c5160f0f7db46eee760c91d7) - **exclude tests from documentation validation** - [@norberttech](https://github.com/norberttech)
 
 ### Fixed
+- [768889](https://github.com/norberttech/md-link-linter/commit/76888902f947bb044477d6317e05b266320107b4) - **broken workflow files** - [@norberttech](https://github.com/norberttech)
 - [#20](https://github.com/norberttech/md-link-linter/pull/20) - **throwing errors for link - empty anchor link** - [@norberttech](https://github.com/norberttech)
 - [9215da](https://github.com/norberttech/md-link-linter/commit/9215da53d7f1cac228a135593a8884de00a9621e) - **CHANGELOG.md formatting** - [@norberttech](https://github.com/norberttech)
 - [#13](https://github.com/norberttech/md-link-linter/pull/13) - **Fix autoloading in docker when analyzed folder already have autoload inside** - [@norberttech](https://github.com/norberttech)
