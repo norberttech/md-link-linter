@@ -18,37 +18,17 @@ use PHPUnit\Framework\TestCase;
 
 final class LinkTest extends TestCase
 {
-    public function test_relative_link() : void
+    public function sshLinksProvider() : array
     {
-        $link = new Link('test', 'relative_link', new \DOMDocument());
-
-        $this->assertTrue($link->isRelative());
-    }
-
-    public function test_mention_link() : void
-    {
-        $link = new Link('test', '@norzechowicz', new \DOMDocument());
-
-        $this->assertTrue($link->isMention());
+        return [
+            ['git@github.com:norzechowicz/md-link-linter.git'],
+            ['git@bitbucket.org:norzechowicz/md-link-linter.git'],
+        ];
     }
 
     public function test_anchor_link() : void
     {
         $link = new Link('test', '#anchor', new \DOMDocument());
-
-        $this->assertTrue($link->isAnchor());
-    }
-
-    public function test_url_link() : void
-    {
-        $link = new Link('test', 'https://norbert.tech', new \DOMDocument());
-
-        $this->assertTrue($link->isUrl());
-    }
-
-    public function test_hash() : void
-    {
-        $link = new Link('test', '#', new \DOMDocument());
 
         $this->assertTrue($link->isAnchor());
     }
@@ -63,11 +43,31 @@ final class LinkTest extends TestCase
         $this->assertTrue($link->isGitSSH());
     }
 
-    public function sshLinksProvider() : array
+    public function test_hash() : void
     {
-        return [
-            ['git@github.com:norzechowicz/md-link-linter.git'],
-            ['git@bitbucket.org:norzechowicz/md-link-linter.git'],
-        ];
+        $link = new Link('test', '#', new \DOMDocument());
+
+        $this->assertTrue($link->isAnchor());
+    }
+
+    public function test_mention_link() : void
+    {
+        $link = new Link('test', '@norzechowicz', new \DOMDocument());
+
+        $this->assertTrue($link->isMention());
+    }
+
+    public function test_relative_link() : void
+    {
+        $link = new Link('test', 'relative_link', new \DOMDocument());
+
+        $this->assertTrue($link->isRelative());
+    }
+
+    public function test_url_link() : void
+    {
+        $link = new Link('test', 'https://norbert.tech', new \DOMDocument());
+
+        $this->assertTrue($link->isUrl());
     }
 }

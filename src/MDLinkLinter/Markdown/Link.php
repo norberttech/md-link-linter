@@ -15,11 +15,11 @@ namespace MDLinkLinter\Markdown;
 
 final class Link
 {
-    private $text;
+    private $document;
 
     private $path;
 
-    private $document;
+    private $text;
 
     public function __construct(string $text, string $path, \DOMDocument $document)
     {
@@ -28,24 +28,24 @@ final class Link
         $this->document = $document;
     }
 
-    public function text() : string
-    {
-        return $this->text;
-    }
-
-    public function path() : string
-    {
-        return $this->path;
-    }
-
     public function document() : \DOMDocument
     {
         return $this->document;
     }
 
+    public function isAnchor() : bool
+    {
+        return \mb_strpos($this->path, '#', 0) === 0;
+    }
+
     public function isGitSSH() : bool
     {
         return (bool) \preg_match('/(.+)\@(.+)\:(.+)\/(.+)\.git/', $this->path);
+    }
+
+    public function isMention() : bool
+    {
+        return \mb_strpos($this->path, '@', 0) === 0;
     }
 
     public function isRelative() : bool
@@ -58,13 +58,13 @@ final class Link
         return (bool) \filter_var($this->path, FILTER_VALIDATE_URL);
     }
 
-    public function isAnchor() : bool
+    public function path() : string
     {
-        return \mb_strpos($this->path, '#', 0) === 0;
+        return $this->path;
     }
 
-    public function isMention() : bool
+    public function text() : string
     {
-        return \mb_strpos($this->path, '@', 0) === 0;
+        return $this->text;
     }
 }

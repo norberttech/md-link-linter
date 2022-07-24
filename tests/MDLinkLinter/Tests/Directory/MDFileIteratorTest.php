@@ -18,23 +18,6 @@ use PHPUnit\Framework\TestCase;
 
 final class MDFileIteratorTest extends TestCase
 {
-    public function test_iterating_over_not_nested_directory() : void
-    {
-        $iterator = new MDFileIterator(__DIR__ . '/fixtures/not_nested', []);
-
-        $mdFiles = \array_map(
-            function (\SplFileObject $mdFile) {
-                return $mdFile->getFilename();
-            },
-            \iterator_to_array($iterator->iterate())
-        );
-
-        $this->assertContains('file_with_valid_link.md', $mdFiles);
-        $this->assertContains('LICENSE.md', $mdFiles);
-        $this->assertContains('file_with_invalid_link.md', $mdFiles);
-        $this->assertCount(4, $mdFiles);
-    }
-
     public function test_iterating_over_nested_directory() : void
     {
         $iterator = new MDFileIterator(__DIR__ . '/fixtures/nested', []);
@@ -64,5 +47,22 @@ final class MDFileIteratorTest extends TestCase
 
         $this->assertContains('file_with_valid_link.md', $mdFiles);
         $this->assertCount(1, $mdFiles);
+    }
+
+    public function test_iterating_over_not_nested_directory() : void
+    {
+        $iterator = new MDFileIterator(__DIR__ . '/fixtures/not_nested', []);
+
+        $mdFiles = \array_map(
+            function (\SplFileObject $mdFile) {
+                return $mdFile->getFilename();
+            },
+            \iterator_to_array($iterator->iterate())
+        );
+
+        $this->assertContains('file_with_valid_link.md', $mdFiles);
+        $this->assertContains('LICENSE.md', $mdFiles);
+        $this->assertContains('file_with_invalid_link.md', $mdFiles);
+        $this->assertCount(4, $mdFiles);
     }
 }

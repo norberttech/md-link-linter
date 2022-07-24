@@ -32,11 +32,6 @@ final class InvalidLinks implements \Countable
         return \count($this->invalidLinks);
     }
 
-    public function map(callable $callback) : array
-    {
-        return \array_map($callback, $this->invalidLinks);
-    }
-
     public function filesCount() : int
     {
         return \count(\array_unique($this->map(
@@ -44,5 +39,10 @@ final class InvalidLinks implements \Countable
                 return $invalidLink->markdownFile()->getPathname();
             }
         )));
+    }
+
+    public function map(callable $callback) : array
+    {
+        return \array_map($callback, $this->invalidLinks);
     }
 }

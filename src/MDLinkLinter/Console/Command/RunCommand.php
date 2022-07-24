@@ -49,11 +49,6 @@ final class RunCommand extends Command
         $this->addOption('root-path', 'rp', InputOption::VALUE_REQUIRED, 'Root path used to assert absolute links. Link: [link](/nested/file.php) will check if file /nested/file.php exists from this path');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output) : void
-    {
-        $this->logger = new ConsoleLogger($output);
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $io = new LinterStyle($input, $output);
@@ -167,5 +162,10 @@ final class RunCommand extends Command
         $io->success('All links in markdown files are valid!');
 
         return 0;
+    }
+
+    protected function initialize(InputInterface $input, OutputInterface $output) : void
+    {
+        $this->logger = new ConsoleLogger($output);
     }
 }

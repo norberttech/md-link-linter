@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace MDLinkLinter\Directory;
 
+use ReturnTypeWillChange;
+
 /**
  * @method bool isDir()
  * @method string getFilename()
@@ -22,9 +24,9 @@ namespace MDLinkLinter\Directory;
 final class DirectoryFilterIterator extends \RecursiveFilterIterator
 {
     /**
-     * @var string[]
+     * @var array<string>
      */
-    private $excludes;
+    private array $excludes;
 
     /**
      * @param string[] $excludes
@@ -41,7 +43,8 @@ final class DirectoryFilterIterator extends \RecursiveFilterIterator
         return !($this->isDir() && \in_array($this->getFilename(), $this->excludes, true));
     }
 
-    public function getChildren()
+    #[\ReturnTypeWillChange]
+    public function getChildren() : self
     {
         /** @var \RecursiveDirectoryIterator $iterator */
         $iterator = $this->getInnerIterator()->getChildren();

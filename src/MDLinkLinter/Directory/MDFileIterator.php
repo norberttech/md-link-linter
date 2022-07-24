@@ -16,14 +16,14 @@ namespace MDLinkLinter\Directory;
 final class MDFileIterator
 {
     /**
-     * @var string
-     */
-    private $path;
-
-    /**
      * @var array<int, string>
      */
     private $excludes;
+
+    /**
+     * @var string
+     */
+    private $path;
 
     /**
      * @param string $path
@@ -33,6 +33,11 @@ final class MDFileIterator
     {
         $this->path = $path;
         $this->excludes = $excludes;
+    }
+
+    public function directory() : \DirectoryIterator
+    {
+        return new \DirectoryIterator($this->path);
     }
 
     /**
@@ -54,10 +59,5 @@ final class MDFileIterator
         foreach ($regex as $path) {
             yield new \SplFileObject(\current($path));
         }
-    }
-
-    public function directory() : \DirectoryIterator
-    {
-        return new \DirectoryIterator($this->path);
     }
 }

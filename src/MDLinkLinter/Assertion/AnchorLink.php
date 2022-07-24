@@ -20,17 +20,10 @@ use Psr\Log\LoggerInterface;
 
 final class AnchorLink implements Assertion
 {
-    private $slugify;
-
-    private $link;
-
-    private $markdownFile;
-
-    public function __construct(Slugify $slugify, Link $link, \SplFileObject $markdownFile)
-    {
-        $this->link = $link;
-        $this->markdownFile = $markdownFile;
-        $this->slugify = $slugify;
+    public function __construct(
+        private readonly Slugify $slugify,
+        private readonly Link $link
+    ) {
     }
 
     public function assert(LoggerInterface $logger) : void

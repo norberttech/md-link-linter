@@ -19,6 +19,11 @@ use MDLinkLinter\Markdown\Link;
 final class AssertionFactory
 {
     /**
+     * @var string[]
+     */
+    private $mentionWhitelist;
+
+    /**
      * @var string
      */
     private $rootPath;
@@ -27,11 +32,6 @@ final class AssertionFactory
      * @var Slugify
      */
     private $slugify;
-
-    /**
-     * @var string[]
-     */
-    private $mentionWhitelist;
 
     /**
      * @param string $rootPath
@@ -51,7 +51,7 @@ final class AssertionFactory
     public function create(Link $link, \SplFileObject $markdownFile) : Assertion
     {
         if ($link->isAnchor()) {
-            return new AnchorLink($this->slugify, $link, $markdownFile);
+            return new AnchorLink($this->slugify, $link);
         }
 
         if ($link->isMention()) {
