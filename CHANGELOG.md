@@ -1,4 +1,4 @@
-## [Unreleased] - 2022-07-24
+## [0.1.0] - 2022-07-24
 
 ### Added
 - [8b16b1](https://github.com/norberttech/md-link-linter/commit/8b16b1348a49743c436171bf19c2ab0c1c8dfbd3) - **RunCommand test** - [@norberttech](https://github.com/norberttech)
