@@ -1,1 +1,1 @@
-[relative](src/file.txt)
+[relative](src/file.txt) and [relative with anchor](src/file.txt#L3)
