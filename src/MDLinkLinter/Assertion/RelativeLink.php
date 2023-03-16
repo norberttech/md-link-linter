@@ -57,6 +57,9 @@ final class RelativeLink implements Assertion
                 continue;
             }
 
+            // GitHub allows to link to specific lines in files
+            $path = \preg_replace('/([#L0-9]+?)$/', '', $path);
+
             if (\file_exists($path)) {
                 $logger->debug(\sprintf('Relative Link %s points to valid existing file: %s', $this->link->text(), $path));
 
