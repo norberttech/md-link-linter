@@ -1,1 +1,1 @@
-[relative](src/file.txt) and [relative with anchor](src/file.txt#L3)
+[relative](src/file.txt), [relative with anchor](src/file.txt#L3), and [double extension](src/file.txt.j2)
