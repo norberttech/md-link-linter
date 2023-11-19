@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace MDLinkLinter\Directory;
 
-use ReturnTypeWillChange;
-
 /**
  * @method bool isDir()
  * @method string getFilename()

@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 final class LinkTest extends TestCase
 {
-    public function sshLinksProvider() : array
+    public static function sshLinksProvider() : array
     {
         return [
             ['git@github.com:norzechowicz/md-link-linter.git'],

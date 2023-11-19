@@ -53,8 +53,8 @@ final class RunCommand extends Command
     {
         $io = new LinterStyle($input, $output);
 
-        $path = \getenv('MD_LINTER_SCAN_DIR') ? \getenv('MD_LINTER_SCAN_DIR') : $input->getArgument('path');
-        $rootPath = $input->getOption('root-path') ? $input->getOption('root-path') : $path;
+        $path = \getenv('MD_LINTER_SCAN_DIR') ?: $input->getArgument('path');
+        $rootPath = $input->getOption('root-path') ?: $path;
 
         $excludes = $input->getOption('exclude');
         $mentionWhitelist = $input->getOption('mention');
